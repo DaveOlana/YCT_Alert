@@ -1,0 +1,70 @@
+databases:
+  - name: yct-alert-db
+    databaseName: yct_alert
+    user: yct_alert_user
+    plan: free
+
+services:
+  # Fastify API Web Service
+  - type: web
+    name: yct-alert-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build --workspace=@yctalert/contracts && npm run build --workspace=@yctalert/api
+    startCommand: npx tsx services/api/scripts/migrate.ts up && npx tsx services/api/scripts/bootstrap-admin.ts && node services/api/dist/index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: yct-alert-db
+          property: connectionString
+      - key: ADMIN_SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_BOOTSTRAP_SECRET
+        generateValue: true
+      - key: IDEMPOTENCY_REPLAY_SECRET
+        generateValue: true
+      - key: ALLOW_LOCAL_NON_TEST_REPORTS
+        value: "false"
+      - key: YCT_MAP_BASE_URL
+        value: https://yct-map.onrender.com
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://yct-alert.onrender.com,https://yct-alert-public.onrender.com,https://yct-alert-admin.onrender.com,https://yct-map.onrender.com
+
+  # Public Incident Reporter Frontend (PWA)
+  - type: static
+    name: yct-alert-public
+    buildCommand: npm ci && npm run build --workspace=@yctalert/contracts && npm run build --workspace=@yctalert/public
+    staticPublishPath: apps/public/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: yct-alert-api
+          property: host
+
+  # Safety Moderation & Governance Admin Portal
+  - type: static
+    name: yct-alert-admin
+    buildCommand: npm ci && npm run build --workspace=@yctalert/contracts && npm run build --workspace=@yctalert/admin
+    staticPublishPath: apps/admin/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: yct-alert-api
+          property: host
