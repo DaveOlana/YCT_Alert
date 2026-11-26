@@ -1,0 +1,25 @@
+# AEOS v0.2 — Contents
+
+- `AEOS_START_HERE.md`
+- `AGENTS.md`
+- `CLAUDE.md`
+- `GEMINI.md`
+- `MIGRATION_FROM_v0.1.md`
+- `aeos/BOOTSTRAP.md`
+- `aeos/CORE_POLICY.md`
+- `aeos/PLAYBOOKS.md`
+- `aeos/QUALITY_PROFILES.md`
+- `aeos/README.md`
+- `aeos/RECORDS_AND_HANDOFFS.md`
+- `aeos/SOURCES.md`
+- `aeos/examples/FIRST_MESSAGE_CLAUDE_CODE.md`
+- `aeos/examples/YCT_ALERT_DROP_IN.md`
+- `aeos/templates/BUG.md`
+- `aeos/templates/DECISION.md`
+- `aeos/templates/HANDOFF.md`
+- `aeos/templates/MILESTONE.md`
+- `aeos/templates/PROJECT.md`
+- `aeos/templates/STATE.md`
+- `handbook/AEOS_HANDBOOK_v0.2.md`
+- `handbook/AEOS_Handbook_v0.2.docx`
+- `handbook/AEOS_Handbook_v0.2.pdf`

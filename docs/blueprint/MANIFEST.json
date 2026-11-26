@@ -1,0 +1,156 @@
+{
+  "package": "YCT_Alert_V1_Builder_Blueprint_2026-10-25",
+  "date": "2026-10-25",
+  "files": [
+    {
+      "path": "00_STATUS_AND_SCOPE.md",
+      "bytes": 3732,
+      "sha256": "562d7bef487ce0fbadc9e8b9566ee514c8e88eca24d75d7630452e948208fe61"
+    },
+    {
+      "path": "01_PRODUCT_REQUIREMENTS.md",
+      "bytes": 5779,
+      "sha256": "c721e95328a5d512fcf1bde728667efc332f261e57c95e5d3fd1ca991e8217a2"
+    },
+    {
+      "path": "02_SYSTEM_ARCHITECTURE.md",
+      "bytes": 4842,
+      "sha256": "e68efe25c485c64ecd68bd0533994ec0c0e0a951c3bfd82d66c93aac1c6a3db6"
+    },
+    {
+      "path": "03_MAP_AUDIT_EVIDENCE.md",
+      "bytes": 4326,
+      "sha256": "1e01e3508a61db255705eb88950a9e6a109560ccdfffabbeb160e4dc14a50bad"
+    },
+    {
+      "path": "04_YCT_MAP_INTEGRATION.md",
+      "bytes": 4919,
+      "sha256": "b313ab354c66d4d86d5177cbbfb129912a62622c611aacf422b6cf0947b456d3"
+    },
+    {
+      "path": "05_DATA_MODEL.md",
+      "bytes": 6187,
+      "sha256": "91aa106102d14bdc1a5de9cbe7799bd12340b8b576f1b2622d4a3427efc90f5c"
+    },
+    {
+      "path": "06_INCIDENT_MATCHING_AND_LIFECYCLE.md",
+      "bytes": 4424,
+      "sha256": "53649ba81abef419b85e3161e757cbcaf084ba02eeeed812b0c632677e88415b"
+    },
+    {
+      "path": "07_API_CONTRACTS.md",
+      "bytes": 5807,
+      "sha256": "c26301560b529a849ebd0e0f2eaa89fd3a83e811dd0ad1e51fee16190e27597c"
+    },
+    {
+      "path": "08_ADMIN_ROLES_AND_ASSIGNMENT.md",
+      "bytes": 3419,
+      "sha256": "796679892a2832d698551dff9613b3a3e4a90647ae92421cbdec21465c034d7a"
+    },
+    {
+      "path": "09_ADMIN_BOOTSTRAP_AND_RECOVERY.md",
+      "bytes": 3359,
+      "sha256": "21ee4377bef1fac0c88cd6d0f562d870d622f998be7d672c4ddc2037d60e571d"
+    },
+    {
+      "path": "10_CAPACITOR_AND_WEB.md",
+      "bytes": 4376,
+      "sha256": "5fd7f71a8bd38e6f5c4c8a4447adf4ea5a95416a5b9b0e3969b9f8681d37c6b3"
+    },
+    {
+      "path": "11_SECURITY_AND_PRIVACY.md",
+      "bytes": 4466,
+      "sha256": "32dcb0ba445814725d7d5073f7445994dfe7b3106642230b6cc5ee27410544fc"
+    },
+    {
+      "path": "12_SAFETY_AND_OPERATIONS.md",
+      "bytes": 3816,
+      "sha256": "b270648d5230f4f6f03483f35fa583e634e35037d5e62d1638b9d382e2e4365b"
+    },
+    {
+      "path": "13_TEST_AND_ACCEPTANCE.md",
+      "bytes": 4841,
+      "sha256": "4c3bfe74b4de0cb19cefc8bd147755b66086703ea47a9fa87e737b9cf4ad4393"
+    },
+    {
+      "path": "14_BUILD_ROADMAP.md",
+      "bytes": 5388,
+      "sha256": "2e868de3248a40f66af710436c3399012bc683899f4bd5c82de6423b2154e4cf"
+    },
+    {
+      "path": "15_ENVIRONMENTS_AND_RELEASE.md",
+      "bytes": 3661,
+      "sha256": "5bf7d7bfe414fc4b91a9b0244a398d6c9be34eb852c25d08645d3e61a8fd564d"
+    },
+    {
+      "path": "16_AGENT_COLLABORATION.md",
+      "bytes": 3386,
+      "sha256": "10f7861230b30a9ffeefccf89588751e8e67d00bb9d7154a096892aeff8e5db7"
+    },
+    {
+      "path": "17_DECISIONS_AND_ASSUMPTIONS.md",
+      "bytes": 2812,
+      "sha256": "f99574244b8044c8658dc8ee0e0774c19ca36fa6267a6b127d6529c159e8658a"
+    },
+    {
+      "path": "18_OPEN_QUESTIONS.md",
+      "bytes": 3552,
+      "sha256": "c79032985f3ec3c85782b17a14a874d334c22c6d9d05d6374c2c22d616dc77ad"
+    },
+    {
+      "path": "19_RISKS.md",
+      "bytes": 2863,
+      "sha256": "d87e934fb86859900bdb30080db973beaa34f45bf82e342e372fef3575d4f384"
+    },
+    {
+      "path": "20_FIRST_IMPLEMENTATION_SPRINT.md",
+      "bytes": 3387,
+      "sha256": "b97675deb23a7f5b4c7b9f62946d7f6ded583078256dcb396a414bedeff8894b"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 2340,
+      "sha256": "f55c47fd45836a2bd1fe622791e5a364c58158d74ef4fd7e862fb4ea4b9a9126"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5453,
+      "sha256": "e2a3d41b2ef8c40c8950e0ede0f3230a5977a972824c74368d99c793af7b6d4b"
+    },
+    {
+      "path": "references/OFFICIAL_TECHNICAL_REFERENCES.md",
+      "bytes": 1970,
+      "sha256": "232762a10ffa0fdbc50a66dc661c2c455e41eb836a61a3197d1949cc38a1eaf8"
+    },
+    {
+      "path": "sources/GEMINI_AUDIT_SUMMARY_AS_SHARED.txt",
+      "bytes": 13218,
+      "sha256": "abbd079846512b71d139a0156cde48cf6c4aa377605c5b4793dd02d615243d10"
+    },
+    {
+      "path": "sources/INITIAL_CONTEXT_BRIEF_2026-10-24.md",
+      "bytes": 18846,
+      "sha256": "d551e370d43adb8a474e2dd63f036add7fcd051ce71f9c0db7755e5140bde36f"
+    },
+    {
+      "path": "sources/PROVENANCE.md",
+      "bytes": 1009,
+      "sha256": "84f4fad3f4d16a3d7a93ce72af52303df796e6efd2197dd1eb2d1f2287511a85"
+    },
+    {
+      "path": "templates/ADR_TEMPLATE.md",
+      "bytes": 684,
+      "sha256": "126c7119509862d2a1cd9de12f037fbcd8961cb668b6187d118731d719327851"
+    },
+    {
+      "path": "templates/RELEASE_CHECKLIST.md",
+      "bytes": 1411,
+      "sha256": "07956610b709840aca523591af2ac3df3fc8e39b4402cb3ecd35daf7cd0709f7"
+    },
+    {
+      "path": "templates/TASK_BRIEF_TEMPLATE.md",
+      "bytes": 1093,
+      "sha256": "9d4c3bdad218829b849a0b70ff8ed4ea220292b2b07e7af9a96ddb253e327c14"
+    }
+  ]
+}

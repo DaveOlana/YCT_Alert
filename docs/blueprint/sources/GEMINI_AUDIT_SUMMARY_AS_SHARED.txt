@@ -1,0 +1,203 @@
+Searched for "YCT_Alert"
+Ran command: `Get-ChildItem -Path "c:\Users\HP\Downloads" -Filter "*Alert*" -Recurse -ErrorAction SilentlyContinue | Select-Object FullName`
+Used tool: manage_task
+Used tool: manage_task
+Ran command: `Get-ChildItem -Path "c:\Users\HP\Downloads\YCT_MAP_Repo" -Filter "*Alert*" -Recurse -ErrorAction SilentlyContinue | Select-Object FullName`
+Used tool: manage_task
+Ran command: `Get-ChildItem -Path "c:\Users\HP\Downloads\*.md", "c:\Users\HP\Documents\*.md", "c:\Users\HP\Desktop\*.md" -ErrorAction SilentlyContinue | Select-Object FullName`
+Ran command: `Get-ChildItem -Path "c:\Users\HP\" -Filter "*Integration_Brief*" -Recurse -Depth 4 -ErrorAction SilentlyContinue | Select-Object FullName`
+Used tool: manage_task
+Ran command: `Get-ChildItem -Path "c:\Users\HP\Documents\YCT Alert\" | Select-Object Name`
+Viewed 1.%20YCT_Map_YCT_Alert_Project_Context_and_Integration_Brief.md:1-800
+Ran command: `Get-Content -Path "C:\Users\HP\Documents\YCT Alert\1. YCT_Map_YCT_Alert_Project_Context_and_Integration_Brief.md" -Head 100`
+Ran command: `Get-Content -Path "C:\Users\HP\Documents\YCT Alert\1. YCT_Map_YCT_Alert_Project_Context_and_Integration_Brief.md" -Skip 100 -Head 150`
+Ran command: `Get-Content -Path "C:\Users\HP\Documents\YCT Alert\1. YCT_Map_YCT_Alert_Project_Context_and_Integration_Brief.md" | Select-Object -Skip 100 -First 150`
+Ran command: `Get-Content -Path "C:\Users\HP\Documents\YCT Alert\1. YCT_Map_YCT_Alert_Project_Context_and_Integration_Brief.md" | Select-Object -Skip 70 -First 60`
+Ran command: `Get-Content -Path "C:\Users\HP\Documents\YCT Alert\1. YCT_Map_YCT_Alert_Project_Context_and_Integration_Brief.md" | Select-Object -Skip 120 -First 30`
+Listed directory YCT_MAP_Repo
+Viewed settings.py:1-158
+Viewed urls.py:1-17
+Viewed views.py:1-60
+Viewed views.py:60-146
+Viewed models.py:1-150
+Viewed models.py:151-361
+Viewed models.py:1-160
+Viewed models.py:160-362
+Viewed models.py:1-111
+Viewed urls.py:1-15
+Viewed editor_urls.py:1-48
+Viewed urls.py:1-13
+Viewed urls.py:1-8
+Viewed views.py:1-150
+Viewed views.py:151-203
+Viewed views.py:1-160
+Viewed views.py:161-252
+Viewed views.py:1-100
+Viewed views.py:101-138
+Listed directory js
+Viewed index.html:1-160
+Viewed index.html:161-292
+Viewed app.js:1-150
+Viewed app.js:151-184
+Viewed map.js:1-160
+Viewed map.js:161-300
+Viewed map.js:301-450
+Listed directory routing
+Viewed algorithm.py:1-73
+Viewed graph.py:1-34
+Viewed destinations.py:1-100
+Viewed destinations.py:101-133
+Viewed matching.py:1-120
+Viewed editor_views.py:1-100
+Viewed render.yaml:1-17
+Viewed build.sh:1-9
+Viewed requirements.txt:1-6
+Viewed .env.example:1-13
+Listed directory docs
+Listed directory project
+Listed directory product
+Listed directory technical
+Viewed API_CONTRACT.md:1-95
+Ran command: `python3.12 manage.py test --no-input`
+Ran command: `.venv\Scripts\python.exe manage.py test --no-input`
+Ran command: `& .\.venv\Scripts\python.exe manage.py test --no-input`
+Ran command: `Get-ChildItem -Directory`
+Ran command: `Get-ChildItem .venv`
+Used tool: manage_task
+Ran command: `$env:PYTHONPATH = "c:\Users\HP\Downloads\YCT_MAP_Repo\.venv\Lib\site-packages" ; python3.12 manage.py test --no-input`
+Used tool: manage_task
+Listed directory tests
+Listed directory js
+Used tool: manage_task
+Ran command: `node --test tests/js/*.test.mjs`
+Used tool: manage_task
+Used tool: manage_task
+Used tool: schedule
+Used tool: manage_task
+Used tool: manage_task
+Used tool: manage_task
+Used tool: schedule
+Used tool: manage_task
+Used tool: schedule
+Used tool: manage_task
+
+I am waiting for the Django test suite to complete so we have verified test counts and pass rates for the audit report.
+
+Used tool: manage_task
+Used tool: manage_task
+Used tool: manage_task
+Used tool: manage_task
+Used tool: manage_task
+Used tool: manage_task
+Used tool: manage_task
+Used tool: manage_task
+Used tool: manage_task
+Ran command: `git status`
+Created YCT_MAP_REPOSITORY_AUDIT_FOR_YCT_ALERT.md
+Viewed YCT_MAP_REPOSITORY_AUDIT_FOR_YCT_ALERT.md:1-75
+Viewed YCT_MAP_REPOSITORY_AUDIT_FOR_YCT_ALERT.md:600-659
+Ran command: `git status`
+
+# Technical Audit Complete: YCT Map Repository Readiness for YCT Alert
+
+I have completed a comprehensive, read-only architectural audit of the **YCT Map** repository to evaluate integration readiness for **YCT Alert**.
+
+The audit report has been compiled and saved to the repository root:
+📄 **[YCT_MAP_REPOSITORY_AUDIT_FOR_YCT_ALERT.md](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/YCT_MAP_REPOSITORY_AUDIT_FOR_YCT_ALERT.md)**
+
+---
+
+### Executive Summary of Key Findings
+
+```
++-----------------------------------------------------------------------------------+
+|                                  USER DEVICE                                      |
+|  +-------------------------------------+  +------------------------------------+  |
+|  |     YCT Map Web / Mobile App        |  |   YCT Alert Web / Capacitor App    |  |
+|  |  (MapLibre GL JS + Campus Nav UI)   |  | (Emergency Reporting + Dispatch UI)|  |
+|  +------------------+------------------+  +------------------+-----------------+  |
++---------------------|----------------------------------------|--------------------+
+                      |                                        |
+       Fetches Active | Incidents              Pulls Approved  | Locations
+       (GeoJSON Layer)| (Polling 30s)          (Read-Only API) | (For Pinning)
+                      v                                        v
++----------------------------------------+  +---------------------------------------+
+|          YCT MAP PLATFORM              |  |          YCT ALERT PLATFORM           |
+|  - Django 5.2.17 + Python 3.12         |  |  - Independent Backend & Auth         |
+|  - PostgreSQL (Neon Serverless)        |  |  - Independent PostgreSQL DB          |
+|  - Pedestrian A* Graph & Snapping      |  |  - Incident Deduplication Engine      |
+|  - Campus Identity & Arrival Anchors   |  |  - Dispatcher & Responder Dashboard   |
+|  - Gunicorn on Render Web Service      |  |  - Independent Hosting / Cloud Run    |
++----------------------------------------+  +---------------------------------------+
+                      ^                                        ^
+                      +================ NO ===================+
+                                SHARED DATABASE
+                                SHARED SESSIONS
+```
+
+1. **Domain Boundary & Ownership:**
+   - **YCT Map owns campus geography:** Authoritative source for location identities, building footprints, arrival anchors, and pedestrian corridors.
+   - **YCT Alert owns emergency incidents:** Authoritative source for emergency dispatch, incident lifecycles, and verification.
+   - **Strict Decoupling:** Zero shared databases, zero cross-database foreign keys, and zero shared authentication tables.
+
+2. **Repository Integrity & Verification:**
+   - The test suite was executed read-only in the local environment:
+     - **Backend (Django):** 265 tests passed (100% pass rate in 228.6s).
+     - **Frontend (Node.js):** 162 tests passed (100% pass rate in 9.3s).
+     - **Total Verified Tests:** **427 passing tests**.
+
+3. **Geographic Identity & Stable Keys:**
+   - All spatial entities ([Location](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/locations/models.py#L37-L141), [Entrance](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/locations/models.py#L171-L245), [Floor](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/locations/models.py#L248-L281), [InternalPlace](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/locations/models.py#L284-L361)) utilize immutable UUIDv4 primary keys (`models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)`).
+   - Identifiers persist across renames, edits, and deployments. YCT Alert can safely store `location_id` as an external string/UUID reference.
+   - Soft-archival (`publication_status = 'ARCHIVED'`) ensures historical incident records never suffer dangling reference errors.
+
+4. **Coordinate Reference System & Ordering Rules:**
+   - Standard WGS84 (EPSG:4326).
+   - **Critical Ordering Distinction:** Python models and Django forms store `(latitude, longitude)`, while all public GeoJSON and MapLibre layers require RFC 7946 `[longitude, latitude]`.
+
+5. **Existing API Evaluation:**
+   - `GET /api/locations/` ([locations/views.py#L84](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/locations/views.py#L84)) already returns a standards-compliant GeoJSON `FeatureCollection` of published places with category filters, verification state, and primary entrance coordinates. YCT Alert can consume this immediately.
+   - YCT Map currently lacks a dedicated single-place lookup (`GET /api/v1/places/<uuid>/`), which is recommended as an additive endpoint.
+
+6. **Pedestrian Routing Invariance:**
+   - The entire routing subsystem ([routing/algorithm.py](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/routing/algorithm.py), [routing/graph.py](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/routing/graph.py), [routing/matching.py](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/routing/matching.py)) must remain **100% untouched** in V1.
+   - No automated incident-avoidance routing will be performed in V1 to avoid graph thrashing and life-safety liabilities. Incidents will be presented visually as MapLibre hazard markers.
+
+7. **Frontend Layer Integration:**
+   - In [static/yct_map/js/map.js](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/static/yct_map/js/map.js), an independent GeoJSON source (`'yct-alert-incidents'`) and unclustered symbol/circle layer can be safely registered.
+   - Layers are placed above campus footprints and walkways, but strictly below active user navigation lines and GPS location markers.
+
+---
+
+### Foundation Document Comparison Summary
+
+| Document Claim | Repository Evidence | Status | Correction / Note |
+|---|---|---|---|
+| **Django + Postgres (Neon) + Render** | [yctmap/settings.py](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/yctmap/settings.py), [render.yaml](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/render.yaml) | **VERIFIED** | Django 5.2.17, psycopg 3.3.6, Gunicorn. |
+| **MapLibre GL JS + OpenFreeMap** | [map.js](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/static/yct_map/js/map.js), [index.html](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/templates/map/index.html) | **VERIFIED** | MapLibre v6.10.0 with OpenFreeMap vector tiles. |
+| **Pedestrian A\* with Entrance Anchors** | [algorithm.py](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/routing/algorithm.py), [destinations.py](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/routing/destinations.py) | **VERIFIED** | In-memory graph + Haversine heuristic + primary entrance resolution. |
+| **Public API lists campus places** | `GET /api/locations/` | **VERIFIED** | Returns GeoJSON `FeatureCollection` of published locations. |
+| **Public API single-place lookup** | `locations/urls.py` | **INCORRECT** | No `GET /api/locations/<uuid>/` exists. Only indoor directory exists. |
+| **Search endpoint includes coordinates** | `GET /api/search/` | **PARTIALLY VERIFIED** | Exists, but omits coordinates for outdoor places to save bandwidth. |
+| **Dynamic routing avoids incident zones** | `routing/algorithm.py` | **FUTURE PROPOSAL** | No dynamic hazard avoidance exists; must remain excluded in V1. |
+| **Shared user accounts between systems** | `yctmap/settings.py` | **INCORRECT / REJECTED** | Prohibited by architectural boundary. Alert will have independent auth. |
+
+---
+
+### Final Technical Verdict (6 Core Questions)
+
+1. **Is YCT Map architecturally ready to integrate with YCT Alert?**  
+   **YES.** The repository is decoupled, modular, and possesses stable spatial models and active GeoJSON APIs.
+2. **Which required capabilities already exist?**  
+   Stable UUIDv4 identification, primary entrance arrival coordinates, GeoJSON places endpoint (`GET /api/locations/`), and MapLibre rendering architecture.
+3. **Which API or frontend changes are necessary?**  
+   - In YCT Map: Add client-side incident polling module (`incidents.js`), register an incident layer in `map.js`, and add an emergency link in the public drawer menu.
+   - In YCT Alert: Consume `GET /api/locations/` and publish `GET /api/v1/incidents/active/`.
+4. **What must remain untouched?**  
+   The entire pedestrian routing subsystem ([routing/algorithm.py](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/routing/algorithm.py)), all database schemas, and all authentication tables.
+5. **What is the smallest safe integration strategy?**  
+   YCT Alert reads YCT Map's `GET /api/locations/` for location selection; YCT Alert exposes `GET /api/v1/incidents/active/`; YCT Map renders this feed in MapLibre via an unclustered GeoJSON layer. Zero shared databases.
+6. **What further information is essential before implementing YCT Alert?**  
+   Confirmation of YCT Alert hosting domain (for CORS header whitelisting), incident taxonomy/severity definitions, and responder verification rules.
+
+Please review the full report in [YCT_MAP_REPOSITORY_AUDIT_FOR_YCT_ALERT.md](file:///c:/Users/HP/Downloads/YCT_MAP_Repo/YCT_MAP_REPOSITORY_AUDIT_FOR_YCT_ALERT.md).

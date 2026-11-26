@@ -1,0 +1,16 @@
+AEOS initialization prompt:
+
+We have successfully brainstormed and already have an idea of what the project is about, how it should be built and expected to work. 
+
+kindly do the below:
+
+
+Read the AEOS instructions and all available project requirements.
+
+Inspect the current repository.
+
+Initialize the essential project documentation, record approved decisions and unresolved questions, and prepare the initial development milestones.
+
+Do not implement application code.
+
+Stop for review before BUILD.

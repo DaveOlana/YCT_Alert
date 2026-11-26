@@ -1,0 +1,12 @@
+dist/
+node_modules/
+build/
+**/android/
+coverage/
+docs/
+aeos/
+handbook/
+*.zip
+*.txt
+*.md
+
