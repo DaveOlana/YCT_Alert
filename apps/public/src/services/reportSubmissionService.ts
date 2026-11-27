@@ -62,7 +62,7 @@ export function deriveLocationSource(
 export async function submitReport(
   formData: ReportFormData,
   idempotencyKey: string,
-  timeoutMs: number = 10000,
+  timeoutMs: number = 65000,
 ): Promise<CreateReportResponse> {
   const baseUrl = getApiBaseUrl();
   const url = `${baseUrl}/api/v1/reports`;
@@ -148,7 +148,7 @@ export async function submitReport(
 export async function fetchReceiptStatus(
   receiptId: string,
   receiptToken: string,
-  timeoutMs: number = 8000,
+  timeoutMs: number = 30000,
 ): Promise<ReceiptStatusResponse> {
   const baseUrl = getApiBaseUrl();
   const url = `${baseUrl}/api/v1/reports/receipts/${receiptId}`;

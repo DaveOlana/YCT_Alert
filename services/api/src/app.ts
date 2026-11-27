@@ -103,6 +103,14 @@ export function buildApp(config: Environment, services?: AppServices): FastifyIn
     secret: config.ADMIN_SESSION_SECRET,
   });
 
+  const getAdminCookieOptions = () => ({
+    path: '/',
+    httpOnly: true,
+    sameSite: config.ADMIN_COOKIE_SAMESITE,
+    signed: true,
+    secure: config.NODE_ENV === 'production' || config.ADMIN_COOKIE_SAMESITE === 'none',
+  });
+
   // Rate Limiting Plugin
   app.register(rateLimit, {
     global: false,
@@ -179,7 +187,7 @@ export function buildApp(config: Environment, services?: AppServices): FastifyIn
 
     const session = await adminAuthService.validateSession(unsigned.value);
     if (!session) {
-      reply.clearCookie('yct_admin_session', { path: '/' });
+      reply.clearCookie('yct_admin_session', getAdminCookieOptions());
       return reply.status(401).send({
         error: {
           code: 'SESSION_EXPIRED',
@@ -493,11 +501,7 @@ export function buildApp(config: Environment, services?: AppServices): FastifyIn
         );
 
         reply.setCookie('yct_admin_session', sessionResult.rawSessionToken, {
-          path: '/',
-          httpOnly: true,
-          sameSite: 'lax',
-          signed: true,
-          secure: config.NODE_ENV === 'production',
+          ...getAdminCookieOptions(),
           maxAge: 12 * 60 * 60,
         });
 
@@ -525,7 +529,7 @@ export function buildApp(config: Environment, services?: AppServices): FastifyIn
           }
         }
 
-        reply.clearCookie('yct_admin_session', { path: '/' });
+        reply.clearCookie('yct_admin_session', getAdminCookieOptions());
         return reply.status(200).send({ success: true, message: 'Logged out successfully.' });
       },
     );

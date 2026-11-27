@@ -122,6 +122,7 @@ const EnvironmentSchema = z
     YCT_MAP_BASE_URL: z.string().url().default('https://yct-map.onrender.com'),
     GEOGRAPHY_SYNC_INTERVAL_MINUTES: z.coerce.number().default(15),
     ADMIN_SESSION_SECRET: z.string().min(16).default('development-session-secret-min-16-chars'),
+    ADMIN_COOKIE_SAMESITE: z.enum(['lax', 'strict', 'none']).default('lax'),
     ADMIN_BOOTSTRAP_SECRET: z.string().min(8).default('bootstrap-dev-token'),
     IDEMPOTENCY_REPLAY_SECRET: z
       .string()

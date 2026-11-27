@@ -13,7 +13,10 @@ if (rootElement) {
 }
 
 // Register PWA service worker
-if ('serviceWorker' in navigator && window.location.protocol === 'https:' || window.location.hostname === 'localhost') {
+if (
+  'serviceWorker' in navigator &&
+  (window.location.protocol === 'https:' || window.location.hostname === 'localhost')
+) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').catch((err) => {
       console.warn('YCT Alert PWA service worker registration notice:', err);

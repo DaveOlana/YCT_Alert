@@ -5,21 +5,28 @@ databases:
     plan: free
 
 services:
-  # Fastify API Web Service
+  # Fastify API Web Service (Render Free Tier: spins down after 15m idle, 512MB RAM, 750h/mo workspace quota)
   - type: web
     name: yct-alert-api
     runtime: node
     plan: free
-    buildCommand: npm ci && npm run build --workspace=@yctalert/contracts && npm run build --workspace=@yctalert/api
-    startCommand: npx tsx services/api/scripts/migrate.ts up && npx tsx services/api/scripts/bootstrap-admin.ts && node services/api/dist/index.js
-    healthCheckPath: /health
+    buildCommand: npm ci --include=dev && npm run build --workspace=@yctalert/contracts && npm run build --workspace=@yctalert/api
+    startCommand: npm run migrate:up --workspace=@yctalert/api && npm run bootstrap:admin:ensure --workspace=@yctalert/api && npm run start --workspace=@yctalert/api
+    healthCheckPath: /health/live
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 10000
-      - key: HOST
+      - key: API_PORT
+        value: "10000"
+      - key: API_HOST
         value: 0.0.0.0
+      - key: API_PUBLIC_URL
+        fromService:
+          type: web
+          name: yct-alert-api
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: TRUST_PROXY
+        value: "true"
       - key: DATABASE_URL
         fromDatabase:
           name: yct-alert-db
@@ -30,18 +37,32 @@ services:
         generateValue: true
       - key: IDEMPOTENCY_REPLAY_SECRET
         generateValue: true
+      - key: ADMIN_BOOTSTRAP_PASSWORD
+        sync: false
+      - key: ADMIN_COOKIE_SAMESITE
+        value: none
       - key: ALLOW_LOCAL_NON_TEST_REPORTS
         value: "false"
       - key: YCT_MAP_BASE_URL
         value: https://yct-map.onrender.com
+      - key: GEOGRAPHY_SYNC_INTERVAL_MINUTES
+        value: "15"
       - key: CORS_ALLOWED_ORIGINS
-        value: https://yct-alert.onrender.com,https://yct-alert-public.onrender.com,https://yct-alert-admin.onrender.com,https://yct-map.onrender.com
+        value: https://yct-alert-public.onrender.com,https://yct-alert-admin.onrender.com,https://yct-map.onrender.com,https://localhost,capacitor://localhost
 
-  # Public Incident Reporter Frontend (PWA)
-  - type: static
+  # Public Incident Reporter Frontend (PWA) — Render Static Site (Free)
+  - type: web
     name: yct-alert-public
-    buildCommand: npm ci && npm run build --workspace=@yctalert/contracts && npm run build --workspace=@yctalert/public
+    runtime: static
+    buildCommand: npm ci --include=dev && npm run build --workspace=@yctalert/contracts && npm run build --workspace=@yctalert/public
     staticPublishPath: apps/public/dist
+    headers:
+      - path: /sw.js
+        name: Cache-Control
+        value: no-cache, no-store, must-revalidate
+      - path: /manifest.webmanifest
+        name: Content-Type
+        value: application/manifest+json
     routes:
       - type: rewrite
         source: /*
@@ -51,12 +72,13 @@ services:
         fromService:
           type: web
           name: yct-alert-api
-          property: host
+          envVarKey: RENDER_EXTERNAL_URL
 
-  # Safety Moderation & Governance Admin Portal
-  - type: static
+  # Safety Moderation & Governance Admin Portal — Render Static Site (Free)
+  - type: web
     name: yct-alert-admin
-    buildCommand: npm ci && npm run build --workspace=@yctalert/contracts && npm run build --workspace=@yctalert/admin
+    runtime: static
+    buildCommand: npm ci --include=dev && npm run build --workspace=@yctalert/contracts && npm run build --workspace=@yctalert/admin
     staticPublishPath: apps/admin/dist
     routes:
       - type: rewrite
@@ -67,4 +89,4 @@ services:
         fromService:
           type: web
           name: yct-alert-api
-          property: host
+          envVarKey: RENDER_EXTERNAL_URL

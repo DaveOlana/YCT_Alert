@@ -13,7 +13,8 @@
     "migrate:down": "tsx scripts/migrate.ts down",
     "test": "tsx --test --test-concurrency=1 tests/**/*.test.ts",
     "test:safeguard": "tsx --test tests/database-safeguard.test.ts",
-    "bootstrap:admin": "tsx scripts/bootstrap-admin.ts"
+    "bootstrap:admin": "tsx scripts/bootstrap-admin.ts",
+    "bootstrap:admin:ensure": "tsx scripts/bootstrap-admin.ts --if-missing"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",

@@ -174,6 +174,7 @@ async function main() {
   const config = loadConfig();
   const args = process.argv.slice(2);
   const rotatePassword = args.includes('--rotate-password');
+  const ifMissing = args.includes('--if-missing');
   const targetTest = args.includes('--test') || config.NODE_ENV === 'test';
   const targetBoth = args.includes('--both');
 
@@ -186,22 +187,48 @@ async function main() {
     targets.push(config.DATABASE_URL);
   }
 
-  let password = process.env.ADMIN_BOOTSTRAP_PASSWORD;
-  if (!password) {
-    password = await promptPasswordMasked(
-      `Enter secure password for ${SUPERADMIN_USERNAME} (min 12 chars, upper/lower/number/symbol): `,
-    );
-    const confirm = await promptPasswordMasked('Confirm password: ');
-    if (password !== confirm) {
-      console.error('\n[bootstrap:error] Passwords do not match.');
-      process.exit(1);
-    }
-  }
-
   for (const dbUrl of targets) {
     const parsed = new URL(dbUrl);
-    const maskedHost = `${parsed.hostname}:${parsed.port}${parsed.pathname}`;
+    const maskedHost = `${parsed.hostname}:${parsed.port || '5432'}${parsed.pathname}`;
     console.log(`[bootstrap] Target database: ${maskedHost}`);
+
+    if (ifMissing) {
+      validateDatabaseUrl(dbUrl, 'BOOTSTRAP_DATABASE_URL', config.NODE_ENV);
+      const checkPool = new Pool({ connectionString: dbUrl, max: 1 });
+      try {
+        const existing = await checkPool.query<{ id: string }>(
+          'SELECT id FROM admin_users WHERE username = $1',
+          [SUPERADMIN_USERNAME],
+        );
+        if (existing.rows.length > 0) {
+          console.log(
+            `[bootstrap] Super-admin ${SUPERADMIN_USERNAME} already provisioned; skipping (--if-missing).`,
+          );
+          continue;
+        }
+      } finally {
+        await checkPool.end();
+      }
+    }
+
+    let password = process.env.ADMIN_BOOTSTRAP_PASSWORD;
+    if (!password) {
+      if (ifMissing) {
+        console.warn(
+          `[bootstrap:warn] Super-admin ${SUPERADMIN_USERNAME} not yet provisioned and ADMIN_BOOTSTRAP_PASSWORD is unset. Skipping automatic bootstrap; set ADMIN_BOOTSTRAP_PASSWORD or run bootstrap:admin manually.`,
+        );
+        continue;
+      }
+      password = await promptPasswordMasked(
+        `Enter secure password for ${SUPERADMIN_USERNAME} (min 12 chars, upper/lower/number/symbol): `,
+      );
+      const confirm = await promptPasswordMasked('Confirm password: ');
+      if (password !== confirm) {
+        console.error('\n[bootstrap:error] Passwords do not match.');
+        process.exit(1);
+      }
+    }
+
     const result = await bootstrapAdmin({
       databaseUrl: dbUrl,
       password,
